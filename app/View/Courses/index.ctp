@@ -1,4 +1,7 @@
 <!-- File: /app/View/Courses/index.ctp -->
 
-<h1>Courses</h1>
-<!-- Loop through $courses array to generate a list to display -->
+<?php
+echo $this->Form->create('Course');
+echo $this->Form->input('courses', array('type' => 'select', 'options' => $courses));
+echo $this->Form->end('Join');
+?>

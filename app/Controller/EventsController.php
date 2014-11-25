@@ -38,7 +38,7 @@ class EventsController extends AppController {
         $event = $this->findEvent($id);
         if($this->request->is(array('post', 'put'))) {
             $this->Event->id = $id;
-            if($this->Post->save($this->request->data)) {
+            if($this->Event->save($this->request->data)) {
                 $this->Session->setFlash(__('Your event has been updated.'));
                 return $this->redirect(array('action' => 'index'));
             }

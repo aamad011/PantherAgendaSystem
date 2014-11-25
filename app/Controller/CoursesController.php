@@ -10,7 +10,7 @@ class CoursesController extends AppController {
     public $helpers = array('Html', 'Form');
 
     public function index() {
-        $this->set('courses', $this->Course->find('all'));
+        $this->set('courses', $this->Course->find('list'));
     }
 
     // Don't think that this function is necessary
