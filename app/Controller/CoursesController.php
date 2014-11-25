@@ -13,6 +13,8 @@ class CoursesController extends AppController {
         $this->set('courses', $this->Course->find('all'));
     }
 
+    // Don't think that this function is necessary
+    /*
     public function view($id = null) {
         if(!$id) {
             throw new NotFoundException(__('Invalid Course'));
@@ -24,4 +26,5 @@ class CoursesController extends AppController {
         }
         $this->set('course', $course);
     }
+    */
 }
