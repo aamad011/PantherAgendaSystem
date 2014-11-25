@@ -10,6 +10,7 @@ class EventsController extends AppController {
     public $helpers = array('Html', 'Form');
 
     public function details($id = null) {
+        /*
         if(!$id) {
             throw new NotFoundException(__('Invalid Event'));
         }
@@ -18,11 +19,13 @@ class EventsController extends AppController {
         if(!$event) {
             throw new NotFoundException(__('Invalid Event'));
         }
-
+        */
+        $event = $this->findEvent($id);
         $this->set('event', $event);
     }
 
     public function edit($id = null) {
+        /*
         if(!$id) {
             throw new NotFoundException(__('Invalid Event'));
         }
@@ -31,7 +34,8 @@ class EventsController extends AppController {
         if(!$event) {
             throw new NotFoundException(__('Invalid Event'));
         }
-
+        */
+        $event = $this->findEvent($id);
         if($this->request->is(array('post', 'put'))) {
             $this->Event->id = $id;
             if($this->Post->save($this->request->data)) {
@@ -44,5 +48,18 @@ class EventsController extends AppController {
         if(!$this->request->data) {
             $this->request->data = $event;
         }
+    }
+
+    private function findEvent($id = null) {
+        if(!$id) {
+            throw new NotFoundException(__('Invalid Event'));
+        }
+
+        $event = $this->Event->findById($id);
+        if(!$event) {
+            throw new NotFoundException(__('Invalid Event'));
+        }
+
+        return $event;
     }
 } 
