@@ -11,7 +11,7 @@ array('controller' => 'studentcourses', 'action' => 'getStudentCourses')); ?></t
 array('controller' => 'studentcourses', 'action' => 'view')); ?></td> 
         <td><?php echo $this->Html->link('Add Student Course',
                 array('controller' => 'studentcourses', 'action' => 'addStudentCourse')); ?></td>
-        <td><?php echo $this->Html->link('Get Student Grade: Jimmy',
+        <td><?php echo $this->Html->link('Get Student Grade:',
 array('controller' => 'studentcourses', 'action' => 'getStudentCourseGrade')); ?></td> 
     <tr>
         <th>Id</th>
