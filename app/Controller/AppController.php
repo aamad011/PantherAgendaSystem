@@ -33,6 +33,21 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
     public $components = array(
         'Session',
-        'Auth'
+        'Auth' => array(
+			'loginRedirect' => array(
+				'controller' => 'users',
+				'action' => 'courses'
+			),
+			'logoutRedirect' => array(
+				'controller' => 'pages',
+				'action' => 'display',
+				'home'
+			),
+			'authenticate' => array(
+				'Form' => array(
+					'passwordHasher' => 'Blowfish'
+				)
+			)
+		)
     );
 }
