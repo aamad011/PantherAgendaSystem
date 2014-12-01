@@ -43,7 +43,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     ?>
                     <div id="loginArea">
                         <?php
-
+                            if($this->Session->check('un')){
+                                echo "<div id='msg'>Hello, ".$this->Session->read('un')."</div>";
+                                echo $this->Html->link('Logout','/Users/Logout',array('class' => 'button'));
+                            }else{
+                                echo $this->Html->link('Login','/Users/Login',array('class' => 'button'));
+                            }
                         ?>
                     </div>
                     <div style="clear:both;"></div>

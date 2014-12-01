@@ -11,7 +11,11 @@ class UsersController extends AppController{
     public $helpers = array('Html', 'Form');
     public function beforeFilter(){
         parent::beforeFilter();
-        $this->Auth->allow(array('add','login','index','logout',''));
+        if($this->Session->check('un')){
+            $this->Auth->allow(array('add','index','logout'));
+        }else {
+            $this->Auth->allow(array('add', 'login', 'index'));
+        }
     }
     public function index()
     {
@@ -38,11 +42,10 @@ class UsersController extends AppController{
      */
     public function login(){
         if ($this->request->is('post')) {
-            $passwordHasher = new BlowfishPasswordHasher();
             $pass = ($this->request->data['User']['password']);
-            $pass = $passwordHasher->hash($pass);
             if ($this->Auth->login(array('username' => $this->request->data['User']['username'],'password'=>$pass))) {
                 $this->Session->setFlash("Successful Login, Welcome ".$this->request->data['User']['username']);
+                $this->Session->write('un',$this->request->data['User']['username']);
                 return $this->redirect(array('controller'=>'Users','action'=>'index'));
             }
             $this->Session->setFlash(__('Password Entered:'.$this->request->data['User']['password']));
@@ -54,7 +57,8 @@ class UsersController extends AppController{
     Needs to set some session variable.
      */
     public function logout(){
-
+        $this->Session->delete('un');
+        return $this->redirect($this->Auth->logout());
     }
  /**
   * Locks out a user.
