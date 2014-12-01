@@ -8,9 +8,7 @@
         <th>Username</th>
         <th>Real Name</th>
     </tr>
-
     <!-- Here is where we loop through our $posts array, printing out post info -->
-
     <div style="clear: both"></div>
     <?php foreach ($users as $user): ?>
         <tr>

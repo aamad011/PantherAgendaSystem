@@ -6,6 +6,7 @@
  * Time: 12:15 PM
  */
 App::uses('AppController','Controller');
+App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 class UsersController extends AppController{
     public $helpers = array('Html', 'Form');
     public function beforeFilter(){
@@ -30,7 +31,6 @@ class UsersController extends AppController{
                 }
             }
     }
-
     /**
      * Logs in a user.
      * return: boolean: True if the user is logged in.
@@ -38,10 +38,14 @@ class UsersController extends AppController{
      */
     public function login(){
         if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirectUrl());
+            $passwordHasher = new BlowfishPasswordHasher();
+            $pass = ($this->request->data['User']['password']);
+            $pass = $passwordHasher->hash($pass);
+            if ($this->Auth->login(array('username' => $this->request->data['User']['username'],'password'=>$pass))) {
+                $this->Session->setFlash("Successful Login, Welcome ".$this->request->data['User']['username']);
+                return $this->redirect(array('controller'=>'Users','action'=>'index'));
             }
-            $this->Session->setFlash(__('Invalid username or password, try again'));
+            $this->Session->setFlash(__('Password Entered:'.$this->request->data['User']['password']));
         }
     }
     /**
