@@ -22,8 +22,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
+		Panther Agenda System
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
@@ -37,9 +36,19 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
+        <div id="header" class="head" >
+            <h1 class="head"><b>
+                    <?php
+                    echo $this->Html->link('Panther Agenda System',array('controller'=> 'users', 'action' => 'index'));
+                    ?>
+                    <div id="loginArea">
+                        <?php
+
+                        ?>
+                    </div>
+                    <div style="clear:both;"></div>
+                </b></h1>
+        </div>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
@@ -58,6 +67,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			</p>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php //echo $this->element('sql_dump'); ?>
 </body>
+<div id="header">
+    <h1 class="foot">
+        <?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?>
+    </h1>
+</div>
 </html>

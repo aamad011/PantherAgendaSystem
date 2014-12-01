@@ -1,4 +1,8 @@
 <h1>Users in DB</h1>
+<ul id="idx" style="float: left">
+    <li><?php echo $this->Html->link('Create User',array('controller' => 'users','action' => 'add')); ?></li>
+    <li><?php echo $this->Html->link('Login User',array('controller' => 'users','action' => 'login')); ?></li>
+</ul>
 <table>
     <tr>
         <th>Username</th>
@@ -6,7 +10,8 @@
     </tr>
 
     <!-- Here is where we loop through our $posts array, printing out post info -->
-    <?php echo $this->Html->link('Create User',array('controller' => 'users','action' => 'add')); ?>
+
+    <div style="clear: both"></div>
     <?php foreach ($users as $user): ?>
         <tr>
             <td><?php echo $user['User']['username']; ?></td>

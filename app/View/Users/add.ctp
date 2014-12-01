@@ -1,6 +1,12 @@
-<?php
-echo $this->Form->create('User', array('action' => 'add'));
-echo $this->Form->input('name', array('label' => 'Name: '));
-echo $this->Form->input('username', array('label' => 'Username: '));
-echo $this->Form->input('password', array('label' => 'Password: '));
-echo $this->Form->end('Register');
+<div class="users form">
+    <?php echo $this->Form->create('User'); ?>
+    <fieldset>
+        <legend><?php echo __('Register'); ?></legend>
+        <?php
+            echo $this->Form->input('username');
+            echo $this->Form->input('name');
+            echo $this->Form->input('password');
+        ?>
+    </fieldset>
+    <?php echo $this->Form->end(__('Register')); ?>
+</div>

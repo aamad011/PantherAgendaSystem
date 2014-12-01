@@ -10,7 +10,7 @@ class UsersController extends AppController{
     public $helpers = array('Html', 'Form');
     public function beforeFilter(){
         parent::beforeFilter();
-        //$this->Auth->allow('add','index','logout');
+        $this->Auth->allow(array('add','login','index','logout',''));
     }
     public function index()
     {

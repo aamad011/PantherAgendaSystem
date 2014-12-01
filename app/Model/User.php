@@ -21,7 +21,7 @@ class User extends AppModel
             'rule' => 'alphaNumeric',
             'required' => true,
             'message' => "Please only use characters 0-9 or a-z"
-        )
+        ),
     ),
         'password' => array(
             'required' => array(
