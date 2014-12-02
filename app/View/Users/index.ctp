@@ -1,6 +1,6 @@
 <h1>Users in DB</h1>
 <ul id="idx" style="float: left">
-    <li><?php echo $this->Html->link('Create User',array('controller' => 'users','action' => 'add')); ?></li>
+    <li><?php echo $this->Html->link('Register',array('controller' => 'users','action' => 'add')); ?></li>
     <li><?php echo $this->Html->link('Login User',array('controller' => 'users','action' => 'login')); ?></li>
 </ul>
 <table>

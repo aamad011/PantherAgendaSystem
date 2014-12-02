@@ -9,5 +9,10 @@
     echo $this->Form->input('password');
     ?>
 </fieldset>
+
 <?php echo $this->Form->end(__('Login')); ?>
+    <?php
+    echo $this->Form->create('Page', array('action' => 'home','type'=>'button'));
+    echo $this->Form->end(__('Cancel'));
+    ?>
 </div>

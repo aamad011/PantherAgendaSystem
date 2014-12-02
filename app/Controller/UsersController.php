@@ -44,8 +44,8 @@ class UsersController extends AppController{
         if ($this->request->is('post')) {
             if(($this->Session->check('locked'))){
                 if((time() - $this->Session->read('lastTry')) <= 60) {
-                    $this->Session->setFlash("You are locked out for " . floor((time() - ($this->Session->read('lastTry'))) / 60) . " minutes and "
-                        . (time() - ($this->Session->read('lastTry')))%60 . " Seconds");
+                    $this->Session->setFlash("You are locked out for " . (floor((time() - ($this->Session->read('lastTry'))) / 60)) . " minutes and "
+                        . (time() - ($this->Session->read('lastTry')))%60 . " Seconds passed of 10 minute lockout");
                     return $this->redirect($this->Auth->redirectUrl());
                 }else{
                     $this->Session->delete('attempts');
