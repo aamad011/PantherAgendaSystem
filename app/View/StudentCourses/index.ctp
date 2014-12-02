@@ -13,20 +13,24 @@ array('controller' => 'studentcourses', 'action' => 'view')); ?></td>
                 array('controller' => 'studentcourses', 'action' => 'addStudentCourse')); ?></td>
         <td><?php echo $this->Html->link('Get Student Grade: Jimmy',
 array('controller' => 'studentcourses', 'action' => 'getStudentCourseGrade')); ?></td> 
+     <td><?php echo $this->Html->link('Calculate tentative game',
+array('controller' => 'studentcourses', 'action' => 'calculateTentativeGrade')); ?></td> 
+
     <tr>
         <th>Id</th>
         <th>Course Id</th>
+        <th>Course Name</th>
         <th>Course Grade</th>
         <th>User Name</th>
     </tr>
 
     <!-- Here is where we loop through our $posts array, printing out post info -->
-
     <?php foreach ($studentcourses as $studentcourse): ?>
     <tr>
         
         <td><?php echo $studentcourse['StudentCourse']['id']; ?></td>
-        <td><?php echo $studentcourse['StudentCourse']['courseid']; ?></td> 
+        <td><?php echo $studentcourse['StudentCourse']['courseid']; ?></td>
+        <td><?php echo $studentcourse['Course']['name']; ?></td> 
         <td><?php echo $studentcourse['StudentCourse']['grade']; ?></td> 
         <td><?php echo $studentcourse['StudentCourse']['username']; ?></td> 
     </tr>
