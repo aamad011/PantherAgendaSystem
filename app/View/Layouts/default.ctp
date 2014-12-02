@@ -39,12 +39,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         <div id="header" class="head" >
             <h1 class="head"><b>
                     <?php
-                    echo $this->Html->link('Panther Agenda System',array('controller'=> 'users', 'action' => 'index'));
+                    echo $this->Html->link('Panther Agenda System',array('controller'=> 'pages', 'action' => 'home'));
                     ?>
                     <div id="loginArea">
                         <?php
-                            if($this->Session->check('un')){
-                                echo "<div id='msg'>Hello, ".$this->Session->read('un')."</div>";
+                            if(AuthComponent::user()){
+                                echo "<div id='msg'>Hello, ".AuthComponent::user('username')."</div>";
                                 echo $this->Html->link('Logout','/Users/Logout',array('class' => 'button'));
                             }else{
                                 echo $this->Html->link('Login','/Users/Login',array('class' => 'button'));
@@ -68,11 +68,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				);
 			?>
 			<p>
-				<?php echo $cakeVersion; ?>
+				<!--<?php echo $cakeVersion; ?>>
 			</p>
 		</div>
 	</div>
-	<?php //echo $this->element('sql_dump'); ?>
+	<?php echo $this->element('sql_dump'); ?>
 </body>
 <div id="header">
     <h1 class="foot">

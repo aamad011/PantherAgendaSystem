@@ -11,10 +11,10 @@ class UsersController extends AppController{
     public $helpers = array('Html', 'Form');
     public function beforeFilter(){
         parent::beforeFilter();
-        if($this->Session->check('un')){
-            $this->Auth->allow(array('add','index','logout'));
-        }else {
-            $this->Auth->allow(array('add', 'login', 'index'));
+        if(AuthComponent::user()){
+            $this->Auth->allow('logout','index','add');
+        }else{
+            $this->Auth->allow('login','index','add');
         }
     }
     public function index()
@@ -42,13 +42,40 @@ class UsersController extends AppController{
      */
     public function login(){
         if ($this->request->is('post')) {
-            $pass = ($this->request->data['User']['password']);
-            if ($this->Auth->login(array('username' => $this->request->data['User']['username'],'password'=>$pass))) {
-                $this->Session->setFlash("Successful Login, Welcome ".$this->request->data['User']['username']);
-                $this->Session->write('un',$this->request->data['User']['username']);
-                return $this->redirect(array('controller'=>'Users','action'=>'index'));
+            if(($this->Session->check('locked'))){
+                if((time() - $this->Session->read('lastTry')) <= 600) {
+                    $this->Session->setFlash("You are locked out for " . ((int)(time() - ($this->Session->read('lastTry'))) / 60) . " minutes and "
+                        . (time() - ($this->Session->read('lastTry')))%60 . " Seconds");
+                    return $this->redirect($this->Auth->redirectUrl());
+                }else{
+                    $this->Session->delete('attempts');
+                    $this->Session->delete('lastTry');
+                    $this->Session->delete('locked');
+                }
             }
-            $this->Session->setFlash(__('Password Entered:'.$this->request->data['User']['password']));
+            if ($this->Auth->login()) {
+                $this->Session->setFlash("Successful Login, Welcome ".$this->request->data['User']['username']);
+                if($this->Session->check('attempts')){
+                    $this->Session->delete('attempts');
+                    $this->Session->delete('lastTry');
+                }
+                return $this->redirect($this->Auth->redirectUrl());
+            }else if(!$this->Session->check('attempts')){
+                $this->Session->write('attempts',2);
+                $this->Session->write('lastTry', time());
+                $this->Session->setFlash("1 failed attempt");
+            }else{
+                if($this->Session->read('attempts')==2){
+                    $this->Session->write('attempts',1);
+                    $this->Session->write('lastTry', time());
+                    $this->Session->setFlash("2 failed attempts");
+
+                }else{
+                    $this->Session->write('locked','yes');
+                    $this->Session->write('lastTry', time());
+                }
+            }
+            //$this->Session->setFlash(__('Invalid username or Password'));
         }
     }
     /**
@@ -57,7 +84,6 @@ class UsersController extends AppController{
     Needs to set some session variable.
      */
     public function logout(){
-        $this->Session->delete('un');
         return $this->redirect($this->Auth->logout());
     }
  /**
