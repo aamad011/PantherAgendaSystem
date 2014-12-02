@@ -13,16 +13,17 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 class User extends AppModel
 {
     var $name = 'User';
-    public $validate = array('username' => array(
-        'required' => array(
-            'rule' => array('notEmpty'),
-            'message' => 'A username is required'
-        ), 'alpha' => array(
-            'rule' => 'alphaNumeric',
-            'required' => true,
-            'message' => "Please only use characters 0-9 or a-z"
-        ),
-    ),
+    public $validate = array(
+		'username' => array(
+			'required' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'A username is required'
+			), 'email' => array(
+				'rule' => 'email',
+				'required' => true,
+				'message' => "Username should be an email"
+			),
+		),
         'password' => array(
             'required' => array(
                 'rule' => array('notEmpty'),

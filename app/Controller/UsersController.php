@@ -43,7 +43,7 @@ class UsersController extends AppController{
     public function login(){
         if ($this->request->is('post')) {
             if(($this->Session->check('locked'))){
-                if((time() - $this->Session->read('lastTry')) <= 600) {
+                if((time() - $this->Session->read('lastTry')) <= 60) {
                     $this->Session->setFlash("You are locked out for " . floor((time() - ($this->Session->read('lastTry'))) / 60) . " minutes and "
                         . (time() - ($this->Session->read('lastTry')))%60 . " Seconds");
                     return $this->redirect($this->Auth->redirectUrl());
