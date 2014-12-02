@@ -13,7 +13,7 @@ $options = array_combine($options,$options);
 //echo $this->Form->create(null, array('url' => array('controller' => 'studentcourses', 'action' => 'index', )));
 echo $this->Form->create();
 //echo $this->Form->label('Ids: ');
-echo $this->Form->input('students', array('type' => 'select', 'options' => $options, 'values' => $options,array('empty'=>false)));
+echo $this->Form->input('students', array('type' => 'select', 'options' => $options,array('empty'=>false)));
 //echo $this->Form->select('courses', $options, array('empty' => false));
 echo $this->Form->end('Find');
 unset($stud);
@@ -21,7 +21,8 @@ unset($options);
 ?>
 <table>
     <tr>
-        <th>Course Id</th>
+        <!--<th>Course Id</th>-->
+        <th> Course Name</th>
         <th>Course Grade</th>
     </tr>
 
@@ -30,7 +31,8 @@ unset($options);
     <?php if(!empty($studentcourses)){
         foreach ($studentcourses as $studentcourse): ?>
     <tr>
-        <td><?php echo $studentcourse['StudentCourse']['courseid']; ?></td> 
+        <!--<td><?php// echo $studentcourse['StudentCourse']['courseid']; ?></td> -->
+        <td><?php echo $studentcourse['Course']['name']; ?></td> 
         <td><?php echo $studentcourse['StudentCourse']['grade']; ?></td> 
     </tr>
     <?php endforeach;} ?>
