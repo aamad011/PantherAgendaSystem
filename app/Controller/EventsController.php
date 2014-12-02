@@ -1,0 +1,83 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Anthony
+ * Date: 11/23/2014
+ * Time: 11:43 AM
+ */
+
+class EventsController extends AppController {
+    public $helpers = array('Html', 'Form');
+
+    public function details($id = null) {
+        /*
+        if(!$id) {
+            throw new NotFoundException(__('Invalid Event'));
+        }
+
+        $event = $this->Event->findById($id);
+        if(!$event) {
+            throw new NotFoundException(__('Invalid Event'));
+        }
+        */
+        
+        $event = $this->findEvent($id);
+        $this->set('event', $event);
+    }
+
+    public function edit($id = null) {
+        /*
+        if(!$id) {
+            throw new NotFoundException(__('Invalid Event'));
+        }
+
+        $event = $this->Event->findById($id);
+        if(!$event) {
+            throw new NotFoundException(__('Invalid Event'));
+        }
+        */
+        $event = $this->findEvent($id);
+        if($this->request->is(array('post', 'put'))) {
+            $this->Event->id = $id;
+            if($this->Event->save($this->request->data)) {
+                $this->Session->setFlash(__('Your event has been updated.'));
+                return $this->redirect(array('action' => 'index'));
+            }
+            $this->Session->setFlash(__('Unable to update your event.'));
+        }
+
+        if(!$this->request->data) {
+            $this->request->data = $event;
+        }
+    }
+    private function findEvent($id = null) {
+        if(!$id) {
+            $this->Session->setFlash(__('Unable to find your event.'));
+            throw new NotFoundException(__('Invalid Event'));
+        }
+
+        $event = $this->Event->findById($id);
+        if(!$event) {
+            throw new NotFoundException(__('Invalid Event'));
+        }
+
+        return $event;
+    }
+    public function findUser($un=null, $cid=null) {
+        if($cid===null)
+        {
+            $user = $this->Event->findAllByUsername($un);
+        }
+        else
+        {
+            $user = $this->Event->findAllByUsernameAndStudentcourseid($un,$cid);
+        }
+        
+        if(!$user) {
+            //$this->Session->setFlash(_('invalid'));
+            throw new NotFoundException(__('Invalid user'));
+        }
+
+        return $user;
+    }
+} 
