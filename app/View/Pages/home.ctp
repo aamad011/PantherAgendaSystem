@@ -19,11 +19,13 @@ endif;
 <?php
     if(!AuthComponent::user()) {
         echo
-        "<ul>
-            <li><?php echo $this->Html->link('Register',array('controller' => 'users','action' => 'add'));  ?></li>
+        "<h1 style='font-size: 150%'>Welcome to the PAS</h1>
+            <ul>
+            <li>";
+            echo $this->Html->link('Register',array('controller' => 'users','action' => 'add'));
+        echo "</li>
         </ul>";
     }else{
         echo "Hello there ".AuthComponent::user('name');
-
     }
 ?>
