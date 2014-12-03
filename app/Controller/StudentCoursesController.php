@@ -17,8 +17,6 @@ class StudentCoursesController extends AppController{
             $condition = array('conditions' => array($thing[0] => $thing[1]));
             $this->set('studentcourses', $this->StudentCourse->find('all', $condition));
         }
-
-        
     }
     public function view(){
         if ($this->request->is('post')) {

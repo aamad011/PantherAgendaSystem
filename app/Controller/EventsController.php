@@ -8,13 +8,11 @@
 
 class EventsController extends AppController {
     public $helpers = array('Html', 'Form');
-
     public function details($id = null) {
         /*
         if(!$id) {
             throw new NotFoundException(__('Invalid Event'));
         }
-
         $event = $this->Event->findById($id);
         if(!$event) {
             throw new NotFoundException(__('Invalid Event'));
@@ -23,7 +21,6 @@ class EventsController extends AppController {
         $event = $this->findEvent($id);
         $this->set('event', $event);
     }
-
     public function edit($id = null) {
         /*
         if(!$id) {
@@ -44,7 +41,6 @@ class EventsController extends AppController {
             }
             $this->Session->setFlash(__('Unable to update your event.'));
         }
-
         if(!$this->request->data) {
             $this->request->data = $event;
         }

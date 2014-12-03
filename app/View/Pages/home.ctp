@@ -16,6 +16,14 @@ if (Configure::read('debug') > 0):
 	Debugger::checkSecurityKeys();
 endif;
 ?>
-<ul>
-    <li><?php echo $this->Html->link('Register',array('controller' => 'users','action' => 'Register'));  ?></li>
-</ul>
+<?php
+    if(!AuthComponent::user()) {
+        echo
+        "<ul>
+            <li><?php echo $this->Html->link('Register',array('controller' => 'users','action' => 'add'));  ?></li>
+        </ul>";
+    }else{
+        echo "Hello there ".AuthComponent::user('name');
+
+    }
+?>
